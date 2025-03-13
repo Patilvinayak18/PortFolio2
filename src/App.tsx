@@ -303,7 +303,7 @@ function App() {
                     <span className="px-2 py-1 bg-gray-700 rounded-full text-xs">PostgreSQL</span>
                   </div>
                   <div className="flex gap-4">
-                    <a href="https://github.com/yourusername/task-manager" className="text-blue-400 hover:text-blue-300 flex items-center gap-1">
+                    <a href="https://github.com/Patilvinayak18/ShortestPathFinder" className="text-blue-400 hover:text-blue-300 flex items-center gap-1">
                       <Github className="w-4 h-4" /> Code
                     </a>
                     <a href="#" className="text-blue-400 hover:text-blue-300 flex items-center gap-1">
@@ -330,7 +330,7 @@ function App() {
                     <span className="px-2 py-1 bg-gray-700 rounded-full text-xs">TailwindCSS</span>
                   </div>
                   <div className="flex gap-4">
-                    <a href="https://github.com/yourusername/ai-chat" className="text-blue-400 hover:text-blue-300 flex items-center gap-1">
+                    <a href="https://github.com/Patilvinayak18/PortFolio2" className="text-blue-400 hover:text-blue-300 flex items-center gap-1">
                       <Github className="w-4 h-4" /> Code
                     </a>
                     <a href="#" className="text-blue-400 hover:text-blue-300 flex items-center gap-1">
