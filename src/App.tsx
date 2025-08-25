@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import emailjs from 'emailjs-com';
 import { motion } from 'framer-motion';
 import { Typewriter } from 'react-simple-typewriter';
 import image1 from './images/ghibli.png';
@@ -110,6 +111,28 @@ const skills = {
 // Main App
 function App() {
   const [selectedBlog, setSelectedBlog] = useState(null);
+    // Form ref and status state
+  const form = useRef();
+  const [status, setStatus] = useState('');
+
+  // Handle form submit using EmailJS
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    // Replace with your EmailJS details
+    emailjs.sendForm(
+      'service_zf0mbfo',       // e.g. 'service_abc123'
+      'template_4xyzy9o',      // e.g. 'template_xyz456'
+      form.current,
+      '-tb7sObDyhl9WfW-w'        // e.g. 'user_789def'
+    )
+    .then((result) => {
+      setStatus('Message sent successfully!');
+      e.target.reset();
+    }, (error) => {
+      setStatus('Failed to send the message. Please try again.');
+    });
+  };
 
   // Skill Bar with animation
   const SkillBar = ({ name, proficiency, description }) => (
@@ -597,40 +620,47 @@ function App() {
       <Twitter className="w-5 h-5" /> Twitter
     </a>
               </div>
+              </div>
               {/* Contact form */}
-              <form className="mt-8 space-y-4">
-                <div>
-                  <label htmlFor="name" className="block mb-2 text-sm font-medium">Name</label>
-                  <input
-                    type="text"
-                    id="name"
-                    className="w-full px-4 py-2 bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="email" className="block mb-2 text-sm font-medium">Email</label>
-                  <input
-                    type="email"
-                    id="email"
-                    className="w-full px-4 py-2 bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="message" className="block mb-2 text-sm font-medium">Message</label>
-                  <textarea
-                    id="message"
-                    rows={4}
-                    className="w-full px-4 py-2 bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-                  ></textarea>
-                </div>
-                <button
-                  type="submit"
-                  className="w-full px-6 py-3 bg-blue-500 hover:bg-blue-600 rounded-lg font-semibold transition"
-                >
-                  Send Message
-                </button>
-              </form>
-            </div>
+               <form ref={form} onSubmit={sendEmail} className="mt-0 space-y-4">
+              <div>
+                <label htmlFor="name" className="block mb-2 text-sm font-medium">Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="user_name"
+                  required
+                  className="w-full px-4 py-2 bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                />
+              </div>
+              <div>
+                <label htmlFor="email" className="block mb-2 text-sm font-medium">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="user_email"
+                  required
+                  className="w-full px-4 py-2 bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                />
+              </div>
+              <div>
+                <label htmlFor="message" className="block mb-2 text-sm font-medium">Message</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows={4}
+                  required
+                  className="w-full px-4 py-2 bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                />
+              </div>
+              <button
+                type="submit"
+                className="w-full px-6 py-3 bg-blue-500 hover:bg-blue-600 rounded-lg font-semibold transition"
+              >
+                Send Message
+              </button>
+              {status && <p className="mt-3 text-center text-green-400 font-semibold">{status}</p>}
+            </form>
           </div>
         </div>
       </motion.section>
